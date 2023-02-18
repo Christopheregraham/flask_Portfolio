@@ -18,12 +18,12 @@ def index():
 def about():
     return render_template('about.html')
 
-@app.route('/<id>/detail')
+@app.route('/project/<id>/detail')
 def detail(id):
     project = Project.query.get(id)
     return render_template('detail.html', project=project)
 
-@app.route('/projectform', methods=['GET', 'POST'])
+@app.route('/project/new', methods=['GET', 'POST'])
 def project_form():
     if request.form:
         new_project = Project(title=request.form['title'],
@@ -37,7 +37,7 @@ def project_form():
     
     return render_template('projectform.html')
 
-@app.route('/<id>/edit', methods=['GET', 'POST'])
+@app.route('/project/<id>/edit', methods=['GET', 'POST'])
 def edit(id):
     project = Project.query.get(id)
     if request.form:
@@ -51,7 +51,7 @@ def edit(id):
         return redirect(url_for('index'))
     return render_template('edit.html', project=project)
 
-@app.route('/<id>/delete')
+@app.route('/project/<id>/delete')
 def delete(id):
     project = Project.query.get(id)
     db.session.delete(project)
