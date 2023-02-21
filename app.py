@@ -18,7 +18,7 @@ def index():
 def about():
     return render_template('about.html')
 
-@app.route('/project<id>')
+@app.route('/project/<id>')
 def detail(id):
     project = Project.query.get(id)
     return render_template('detail.html', project=project)
